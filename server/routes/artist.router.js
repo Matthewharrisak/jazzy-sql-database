@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 
-const Pool = pg.Pool; // Class
+ const Pool = pg.Pool; // Class
 
 // Connect Node to our database
 const pool = new Pool({
@@ -44,5 +44,9 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         });
 });
+
+pool.on('connect', () => {
+    console.log("Postgresql Connected");
+} );
 
 module.exports = router;
